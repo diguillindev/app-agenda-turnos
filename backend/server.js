@@ -7,6 +7,7 @@
 
 import express from 'express';
 import usuarioRoutes from './routes/usuario.routes.js';
+import authRoutes from './routes/auth.routes.js'; //conecta las rutas de registro e inicio de sesion 
 
 const app = express();
 
@@ -15,7 +16,7 @@ const app = express();
  * Permite que el servidor interprete solicitudes con cuerpo JSON.
  */
 app.use(express.json());
-
+app.use('/api/auth', authRoutes); // Rutas de autenticación
 /**
  * Rutas de la aplicación.
  * Todas las rutas relacionadas con usuarios estarán bajo el prefijo `/api`.
