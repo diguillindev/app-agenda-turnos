@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "api desarrollo agenda turnos",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "author": "sebastian contreras - NubleWeb",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  }
+}
