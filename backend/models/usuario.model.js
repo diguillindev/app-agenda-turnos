@@ -41,6 +41,9 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true, // Validación de formato de correo electrónico
+      },
     },
     password: {
       type: DataTypes.STRING(255),
@@ -52,6 +55,10 @@ const Usuario = sequelize.define(
     },
     telefono: {
       type: DataTypes.STRING(15),
+      allowNull: true,
+      validate: {
+          is: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/, // Expresión regular para números de teléfono
+      },
     },
     activo: {
       type: DataTypes.BOOLEAN,
@@ -67,5 +74,16 @@ const Usuario = sequelize.define(
     timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
   }
 );
+
+Usuario.associate = (models) => {
+  Usuario.hasMany(models.Turno, { foreignKey: 'usuario_id' });
+  Usuario.hasMany(models.CambioTurno, { foreignKey: 'usuario_id' });
+  Usuario.hasMany(models.Notificacion, { foreignKey: 'usuario_id' });
+  Usuario.hasMany(models.Soporte, { foreignKey: 'usuario_id' });
+  Usuario.hasMany(models.Vacacion, { foreignKey: 'usuario_id' });
+  Usuario.hasMany(models.Mensaje, { foreignKey: 'remitenteId' }); // Este parece correcto
+  Usuario.hasMany(models.Permiso, { foreignKey: 'usuario_id' }); // Cambia roleId a usuario_id si es necesario
+  Usuario.hasMany(models.Licencia, { foreignKey: 'usuario_id' });
+};
 
 export default Usuario;
