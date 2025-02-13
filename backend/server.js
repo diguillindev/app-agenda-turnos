@@ -8,6 +8,7 @@
 import express from 'express';
 import usuarioRoutes from './routes/usuario.routes.js';
 import authRoutes from './routes/auth.routes.js'; //conecta las rutas de registro e inicio de sesion 
+import protectedRoutes from './routes/protected.routes.js';//rutas protegidas con JWT 
 
 const app = express();
 
@@ -22,6 +23,9 @@ app.use('/api/auth', authRoutes); // Rutas de autenticación
  * Todas las rutas relacionadas con usuarios estarán bajo el prefijo `/api`.
  */
 app.use('/api', usuarioRoutes);
+
+// Rutas protegidas
+app.use('/api/protected', protectedRoutes);
 
 /**
  * Inicia el servidor Express.
